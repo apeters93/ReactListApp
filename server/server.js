@@ -58,7 +58,7 @@ initializeDatabase();
 app.get("/api", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT id, name FROM items ORDER BY created_at DESC"
+      "SELECT id, name, type FROM items ORDER BY created_at DESC"
     );
     res.json({ stuff: result.rows });
   } catch (error) {

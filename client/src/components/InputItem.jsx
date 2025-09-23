@@ -1,9 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import "../App.css";
 
-const Button = styled.button`
-  background-color: blue;
+const AddButton = styled.button`
+  background-color: green;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -11,7 +10,7 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: darkblue;
+    background-color: darkgreen;
   }
 `;
 
@@ -25,7 +24,7 @@ const InputItem = ({ newItem, setNewItem, handleAddItem }) => {
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Enter new item name"
         ></input>
-        <Button type="submit">Add Item</Button>
+        <AddButton type="submit">Add Item</AddButton>
       </div>
     </form>
   );

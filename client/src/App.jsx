@@ -12,19 +12,18 @@ function App() {
 
   console.log("ItemsArray:", itemsArray);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(apiUrl);
-      console.log("Data from server:", response.data.stuff);
-      setItemsArray(response.data.stuff);
-    } catch (error) {
-      console.error("Error fetching data from server:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        console.log("Data from server:", response.data.stuff);
+        setItemsArray(response.data.stuff);
+      } catch (error) {
+        console.error("Error fetching data from server:", error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [apiUrl]);
 
   const handleAddItem = async (itemName) => {
     try {
