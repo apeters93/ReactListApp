@@ -54,3 +54,20 @@
   gap: 10px;
   margin-top: 50px;
 }
+
+/* Table css */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #180e5b;
+}
