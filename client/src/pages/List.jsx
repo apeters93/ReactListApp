@@ -10,8 +10,15 @@ const List = () => {
   const [newItem, setNewItem] = useState("");
   const apiUrl = import.meta.env.VITE_API_URL;
   // const apiUrl = import.meta.env.VITE_RAILS_API_URL;
+  const railsApiUrl = import.meta.env.VITE_RAILS_API_URL;
 
   console.log("ItemsArray:", itemsArray);
+
+  const person1 = {
+    id: 2,
+    name: "Andrew",
+    items: [],
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +50,26 @@ const List = () => {
     }
   };
 
+  // Example function to create an item via Rails API
+  const createItem = async (itemData) => {
+    try {
+      const response = await axios.post(`${railsApiUrl}/items`, {
+        item: {
+          name: itemData.name,
+          person_id: itemData.personId,
+          type: itemData.type,
+        },
+      });
+      console.log("Item created:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Error creating item:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
   const handleDelete = async (itemId) => {
     try {
       await axios.delete(`${apiUrl}/items/${itemId}`);
@@ -57,7 +84,9 @@ const List = () => {
   };
 
   return (
-    <>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <div className="card">
         <p>My List of Items: </p>
         <ItemList items={itemsArray} onDelete={handleDelete} />
@@ -66,9 +95,33 @@ const List = () => {
           setNewItem={setNewItem}
           handleAddItem={handleAddItem}
         />
+
         <p>Total number of items: {itemsArray.length}</p>
       </div>
-    </>
+      <div
+        style={{
+          display: "flex",
+          alignContent: "center",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div>This creates an item via the Rails API: </div>
+        <InputItem
+          id="rails-input"
+          newItem={newItem}
+          setNewItem={setNewItem}
+          handleAddItem={() =>
+            createItem({
+              name: newItem,
+              personId: person1.id,
+              type: "personal",
+            })
+          }
+        />
+      </div>
+    </div>
   );
 };
 

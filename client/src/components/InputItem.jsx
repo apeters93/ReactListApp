@@ -14,11 +14,12 @@ const AddButton = styled.button`
   }
 `;
 
-const InputItem = ({ newItem, setNewItem, handleAddItem }) => {
+const InputItem = ({ newItem, setNewItem, handleAddItem, id }) => {
   return (
     <form onSubmit={() => handleAddItem(newItem)}>
       <div className="input">
         <input
+          id={id}
           type="text"
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
